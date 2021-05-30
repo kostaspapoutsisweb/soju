@@ -4,6 +4,4 @@
 
 ### Play music samples from Spotify links effortlessly.
 
-<br>
-
 ### <https://sojuplayer.netlify.app>
