@@ -241,18 +241,6 @@
         }
       },
     },
-    metaInfo() {
-      return {
-        title: "Animyaa - Music",
-        meta: [
-          { property: 'og:type', content: 'profile' },
-          { property: 'og:title', content: 'Animyaa - Music' },
-          { property: 'og:url', content: 'https://myaa.netlify.app/music' },
-          { property: 'og:image', content: '/img/profile/spotify.jpg' },
-          { name: 'og:description', content: "Spotify favorites, playlists, and more 🎶" },
-        ]
-      }
-    }
   }
 </script>
 
