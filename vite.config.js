@@ -9,7 +9,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate', 
       manifest: {
-        name: "Soju for Spotify",
+        name: "Soju for Spotify 🎶",
         short_name: "Soju",
         description: "Play music samples from Spotify links effortlessly.",
         icons: [
