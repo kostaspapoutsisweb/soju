@@ -141,20 +141,23 @@
         let itemFormat;
         let itemId;
 
-        let formatFinder = /(?<=com\/)\w+(?=\/)/m;
+        // Safari doesn't support lookbehind regex, workaround by matching '/' and splicing
+        // let formatFinder = /(?<=com\/)\w+(?=\/)/m;
+        let formatFinder = /\/\w{4,12}(?=\/)/m;
         let formatResults;
         if ((formatResults = formatFinder.exec(this.url)) !== null) {
           formatResults.forEach((formatRes) => {
-            itemFormat = formatRes;
+            itemFormat = formatRes.substring(1);
             console.log(itemFormat);
           });
         }
 
-        let idFinder = /(?<=com\/\w+\/)\w+(?=\?|$)/m;
+        // let idFinder = /(?<=com\/\w+\/)\w+(?=\?|$)/m;
+        let idFinder = /\/\w{14,26}(?=\?|$)/m;
         let idResults;
         if ((idResults = idFinder.exec(this.url)) !== null) {
           idResults.forEach((idRes) => {
-            itemId = idRes;
+            itemId = idRes.substring(1);
             console.log(itemId);
           });
         }
