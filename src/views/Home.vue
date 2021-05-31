@@ -134,8 +134,8 @@
       };
 
       // If there is ?url= parameter, directly put into field and run
-      if (this.$route.query.url) {
-        this.url = this.$route.query.url
+      if (this.$route.query.s) {
+        this.url = this.$route.query.s
         this.getSpotifyData()
       }
       
