@@ -35,6 +35,7 @@
               { title: "Vue 3 template starter by web2033", url: "https://github.com/web2033/vite-vue3-tailwind-starter" },
               { title: "Logo image by Timothy Dykes on Unsplash", url: "https://unsplash.com/photos/ekPfOrUhNgs"},
               "https://learnvue.co/2021/01/4-awesome-examples-of-vue-router-transitions/",
+              { title: "Icons by Material Design Icons", url: "https://materialdesignicons.com/" },
               "https://www.gradientmagic.com/",
             ]
           },
@@ -44,6 +45,13 @@
               { title:"Powered by Spotify Web API", url:"https://developer.spotify.com/documentation/web-api/" },
               "https://google-webfonts-helper.herokuapp.com",
               "https://regex101.com/",
+            ]
+          },
+          {
+            title: 'Resources',
+            sources: [
+              { title: "Dan Fletcher - How To Hide API Keys Using Netlify", url: "https://www.youtube.com/watch?v=m2Dr4L_Ab14" },
+              { title: "Fabio Rosado - Hide your API Keys with Netlify Functions", url: "https://dev.to/fabiorosado/hide-your-api-keys-with-netlify-functions-93m" }
             ]
           },
         ],
