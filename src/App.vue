@@ -7,7 +7,7 @@
           <div class="text-left mx-t2 md:mx-6 mb-t2 sm:mb-0">
             <h1 class="font-bold text-gray-200 text-xs md:text-sm uppercase my-2">Music Player</h1>
             <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Soju for Spotify</h1>
-            <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Play music samples from Spotify links effortlessly</h1>
+            <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">listen to music samples from Spotify links on any device</h1>
           </div>
         </div>
       </router-link>
