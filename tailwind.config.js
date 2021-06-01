@@ -29,6 +29,7 @@ module.exports = {
         '6r': '6rem',
       },
       gridTemplateColumns: {
+        'a1f': 'auto 1fr',
         '1f2fa': '1fr 2fr auto',
         '1f2f1f': '1fr 2fr 1fr',
         '1f3f': '1fr 3fr',
@@ -119,6 +120,9 @@ module.exports = {
         '56': '14rem',
         '64': '16rem',
         '20r': '20rem',
+      },
+      scale: {
+        '1025': '1.025'
       },
       spacing: {
         't05': '0.25rem',

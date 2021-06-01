@@ -8,12 +8,16 @@ import { createStore } from 'vuex'
 const store = createStore({
   state () {
     return {
+      copyYear: '2021',
       access_token: '',
       spotifyData: [],
       // count: 0
     }
   },
   mutations: {
+    copyYear (state, data) {
+      state.copyYear = data
+    },
     access_token (state, data) {
       state.access_token = data
     },

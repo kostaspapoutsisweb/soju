@@ -1,17 +1,19 @@
 <template>
   <div class="about w-full text-center">
-    <div class="pageheader flex items-end select-none min-h-64 md:min-h-20r">
-      <router-link to="/">
-        <div class="px-t2 sm:px-6 md:px-12 sm:py-t2 md:py-t4 flex flex-wrap sm:flex-no-wrap items-end content-start">
-          <img class="w-24 h-24 xs:w-32 xs:h-32 md:w-40 md:h-40 lg:w-56 lg:h-56 mx-t2 sm:mx-0 my-t1 sm:my-0 rounded-full shadow-2xl filter contrast-125 select-none object-cover pointer-events-none" src="/media/logo-full.jpg" alt="Soju for Spotify">
-          <div class="text-left mx-t2 md:mx-6 mb-t2 sm:mb-0">
-            <h1 class="font-bold text-gray-200 text-xs md:text-sm uppercase my-2">Music Player</h1>
-            <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Soju for Spotify</h1>
-            <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Listen to music samples from Spotify links on any device</h1>
-          </div>
+    <router-link to="/">
+      <div class="pageheader grid grid-cols-a1f p-4 sm:p-12 sm:pb-4 md:pb-6 gap-4 sm:gap-8 items-end">
+        <img class="w-20 h-20 xs:w-28 xs:h-28 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full shadow-2xl filter contrast-125 select-none object-cover pointer-events-none" src="/media/logo-full.jpg" alt="Soju for Spotify" />
+        <div class="text-left hidden xs:block">
+          <h1 class="font-bold text-gray-200 text-xs md:text-sm uppercase my-2">Music Player</h1>
+          <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Soju for Spotify</h1>
+          <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Listen to music samples from Spotify links on any device</h1>
         </div>
-      </router-link>
-    </div>
+        <div class="text-left xs:hidden">
+          <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Soju</h1>
+          <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Listen to Spotify music samples</h1>
+        </div>
+      </div>
+    </router-link>
 
     <div class="bg-161616 text-eeeeee px-t2 sm:px-6 md:px-12 py-t2 md:py-6 text-left min-h-screen">
 
@@ -32,6 +34,9 @@
         </transition>
       </router-view>
 
+      <div class="text-center pt-24 pb-2">
+        <a href="https://github.com/coffeebank" rel="noopener" class="text-gray-500 transition duration-300 hover:text-gray-400">&copy; {{ this.$store.state.copyYear }}&ensp;Made with 💝 by coffeebank</a>
+      </div>
 
     </div>
 
@@ -46,6 +51,12 @@
           { title: "Home", url: "/" },
           { title: "About", url: "/about" },
         ],
+      }
+    },
+    async created() {
+      let currentYear = new Date().getFullYear();
+      if ( currentYear > this.$store.state.copyYear) {
+        this.$store.commit('copyYear', this.$store.state.copyYear + "–" + currentYear)
       }
     },
     methods: {
@@ -77,7 +88,7 @@ html, body {
   font-family: Jost, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .pageheader {
-  height: 20vh;
+  /* height: 20vh; */
   background-image: linear-gradient(135deg, rgba(238, 238, 238, 0.1),rgba(16, 16, 16, 0.1)),linear-gradient(183deg, rgb(223,14,20),rgb(25,20,20));
   background-size: cover;
   background-position: center;

@@ -15,11 +15,11 @@
           v-for="sitem in spotifyData"
           :key="sitem.id"
         >
-          <div class="bg-202020 hover:bg-282828 grid grid-cols-1 sm:grid-cols-1f3f gap-4 sm:gap-8 anim-fade-in transition-all duration-300 p-t2 rounded-sm"
+          <div class="bg-202020 hover:bg-282828 grid grid-cols-1 sm:grid-cols-1f3f gap-6 sm:gap-8 anim-fade-in transition-all duration-300 p-5 rounded-sm"
             v-if="sitem.id !== null"
           >
             <div class="grid grid-cols-1f3fa sm:block">
-              <div class="relative rounded-sm shadow-2xl overflow-hidden">
+              <div class="relative rounded-sm shadow-2xl overflow-hidden transition duration-300 transform hover:scale-105">
                 <a :href="sitem.url" class="h-auto">
                   <img :src="sitem.data.images[0].url" class="w-full h-auto" />
                 </a>
@@ -50,7 +50,7 @@
                   v-for="strack in sitem.data.tracks.items"
                   :key="strack.id"
                   @click="play(strack.track.preview_url)">
-                  <div class="w-6 sm:w-8 flex-none">
+                  <div class="w-8 flex-none">
                     <!-- mdi-music-note-off -->
                     <svg v-if="strack.track.preview_url == null" class="m-1 mr-2 w-4 h-auto" viewBox="0 0 24 24">
                       <path fill="currentColor" d="M4.27 3L3 4.27L12 13.27V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17S7.79 21 10 21 14 19.21 14 17V15.27L19.73 21L21 19.73L4.27 3M14 7H18V3H12V8.18L14 10.18Z" />
@@ -78,7 +78,7 @@
                   v-for="strack in sitem.data.tracks.items"
                   :key="strack.id"
                   @click="play(strack.preview_url)">
-                  <div class="w-6 sm:w-8 flex-none">
+                  <div class="w-8 flex-none">
                     <!-- mdi-music-note-off -->
                     <svg v-if="strack.preview_url == null" class="m-1 mr-2 w-4 h-auto" viewBox="0 0 24 24">
                       <path fill="currentColor" d="M4.27 3L3 4.27L12 13.27V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17S7.79 21 10 21 14 19.21 14 17V15.27L19.73 21L21 19.73L4.27 3M14 7H18V3H12V8.18L14 10.18Z" />
@@ -277,7 +277,9 @@
         //       clearInterval(fadeout);
         //     }
         //   }, 200);
-        this.player.pause();
+        if (this.isPlaying == true) {
+          this.player.pause();
+        }
       }
     }
   }
