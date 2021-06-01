@@ -262,6 +262,24 @@
         }
       },
     },
+    watch: {
+      $route (to, from){
+        // https://stackoverflow.com/a/7942472
+        // let fadeout = setInterval(
+        //   function() {
+        //     // Reduce volume by 0.05 as long as it is above 0
+        //     // This works as long as you start with a multiple of 0.05!
+        //     if (this.player.volume > 0) {
+        //       this.player.volume -= 0.05;
+        //     }
+        //     else {
+        //       // Stop the setInterval when 0 is reached
+        //       clearInterval(fadeout);
+        //     }
+        //   }, 200);
+        this.player.pause();
+      }
+    }
   }
 </script>
 
