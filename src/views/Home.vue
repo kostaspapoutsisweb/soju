@@ -119,19 +119,23 @@
         player: null,
         playingUrl: null,
         requestOptionsGet: {},
-        access_token: '',
         url: "",
         spotifyData: [],
       }
     },
     async created() {
-      const responsePost = await fetch("/.netlify/functions/getSpotifyToken");
-      const dataPost = await responsePost.json();
-      this.access_token = dataPost.data.access_token;
+      if (this.$store.state.access_token == '') {
+        const responsePost = await fetch("/.netlify/functions/getSpotifyToken");
+        const dataPost = await responsePost.json();
+        this.$store.commit('access_token', dataPost.data.access_token)
+      }
       this.requestOptionsGet = {
         method: "GET",
-        headers: { 'Authorization': 'Bearer ' + this.access_token }
+        headers: { 'Authorization': 'Bearer ' + this.$store.state.access_token }
       };
+
+      // Import from vuex if exists
+      this.spotifyData = this.$store.state.spotifyData
 
       // If there is ?url= parameter, directly put into field and run
       if (this.$route.query.s) {
@@ -224,6 +228,7 @@
           })
         }
         console.log(this.spotifyData)
+        this.$store.commit('spotifyData', this.spotifyData)
       },
       async getSpotifyAlbum(id) {
         // GET playlist data using token
