@@ -25,11 +25,11 @@
                 </a>
               </div>
               <div class="px-t2 sm:px-0 sm:pt-t2">
-                <h2 class="truncate pt-0 font-semibold tracking-tight">{{sitem.data.name}}</h2>
-                <p class="truncate text-gray-500 text-sm sm:text-base tracking-tighter"
+                <h2 class="pt-0 font-semibold tracking-tight">{{sitem.data.name}}</h2>
+                <p class="text-gray-500 text-sm sm:text-base tracking-tighter"
                   v-if="sitem.type == 'playlist'"
                 >{{ sitem.data.owner.display_name }}<br>{{ sitem.data.tracks.total }} songs</p>
-                <p class="truncate text-gray-500 text-sm sm:text-base tracking-tighter"
+                <p class="text-gray-500 text-sm sm:text-base tracking-tighter"
                   v-else
                 >{{ formatArtists(sitem.data.artists) }}</p>
               </div>
