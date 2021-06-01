@@ -1,7 +1,7 @@
 <template>
   <div class="about w-full text-center">
     <router-link to="/">
-      <div class="pageheader grid grid-cols-a1f p-4 sm:p-12 sm:pb-4 md:pb-6 gap-4 sm:gap-8 items-end">
+      <div class="pageheader grid grid-cols-a1f p-4 pt-8 sm:p-12 sm:pb-4 md:pb-6 gap-4 sm:gap-8 items-end">
         <img class="w-20 h-20 xs:w-28 xs:h-28 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full shadow-2xl filter contrast-125 select-none object-cover pointer-events-none" src="/media/logo-full.jpg" alt="Soju for Spotify" />
         <div class="text-left hidden xs:block">
           <h1 class="font-bold text-gray-200 text-xs md:text-sm uppercase my-2">Music Player</h1>
