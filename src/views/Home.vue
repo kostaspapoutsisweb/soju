@@ -142,10 +142,6 @@
         this.urlMethod = this.$route.query.method;
         this.$store.commit('spotifyMethod', 'embed');
       };
-      if (this.$route.query.sm) {
-        // For single track only
-        this.urlMethod = this.$route.query.method;
-      };
 
       if (this.$store.state.access_token == '' && this.$store.state.spotifyMethod === 'api') {
         // Add fallbacks for when Spotify API fails 
@@ -171,9 +167,21 @@
       // If there is ?url= parameter, directly put into field and run
       if (this.$route.query.s) {
         this.url = this.$route.query.s
-        this.getSpotifyData()
-        // Reset sm to default
-        this.urlMethod = this.$store.state.spotifyMethod
+        if (this.$route.query.sa == true) {
+          this.urlMethod = "embed"
+          await this.getSpotifyData()
+          this.urlMethod = "api"
+          await this.getSpotifyData()
+          // Restore settings
+          this.urlMethod = this.$store.state.spotifyMethod
+        } else if (this.$route.query.sm) {
+          this.urlMethod = this.$route.query.sm;
+          await this.getSpotifyData()
+          // Restore settings
+          this.urlMethod = this.$store.state.spotifyMethod
+        } else {
+          await this.getSpotifyData()
+        }
         document.getElementById("player").scrollIntoView({behavior: "smooth"});
       };
       
@@ -289,11 +297,12 @@
         return data
       },
       async getSpotifyDataEmbed() {
-        let urlMethod = this.urlMethod
-        this.urlMethod = "embed"
-        await this.getSpotifyData()
-        this.urlMethod = urlMethod
+        let urlMethod = this.urlMethod;
+        this.urlMethod = "embed";
+        await this.getSpotifyData();
+        this.urlMethod = urlMethod;
         document.getElementById("player").scrollIntoView({behavior: "smooth"});
+        return true
       },
       getSpotifyEmbed(itemFormat=null, url) {
         return {

@@ -25,6 +25,7 @@ Here's a list of query parameters. Many of these can be strung together using `?
 |Query|Type|Description|
 |:---|:---|:---|
 |?s=|str|Jump straight to processing a Spotify url|
+|?sa=|bool|Run all processing methods for an `?s=` url<br>*see `?method=` for more info*|
 |?sm=|str|Processing method for an `?s=` url<br>*see `?method=` for more info*|
 |?method=|str|Set default processing method for the browsing session<br><ul><li>**api** *(default)*: Uses Spotify Web API to retrieve media</li><li>**embed**: Uses official Spotify media embed (fallback)</li></ul>|
 
