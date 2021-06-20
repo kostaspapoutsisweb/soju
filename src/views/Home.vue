@@ -167,20 +167,20 @@
       // If there is ?url= parameter, directly put into field and run
       if (this.$route.query.s) {
         this.url = this.$route.query.s
-        if (this.$route.query.sa == true) {
-          this.urlMethod = "embed"
-          await this.getSpotifyData()
-          this.urlMethod = "api"
-          await this.getSpotifyData()
+        if (this.$route.query.sa == "true") {
+          this.urlMethod = "embed";
+          await this.getSpotifyData();
+          this.urlMethod = "api";
+          await this.getSpotifyData();
           // Restore settings
-          this.urlMethod = this.$store.state.spotifyMethod
+          this.urlMethod = this.$store.state.spotifyMethod;
         } else if (this.$route.query.sm) {
-          this.urlMethod = this.$route.query.sm;
-          await this.getSpotifyData()
+          this.urlMethod = this.$route.query.sm;;
+          await this.getSpotifyData();
           // Restore settings
-          this.urlMethod = this.$store.state.spotifyMethod
+          this.urlMethod = this.$store.state.spotifyMethod;
         } else {
-          await this.getSpotifyData()
+          await this.getSpotifyData();
         }
         document.getElementById("player").scrollIntoView({behavior: "smooth"});
       };
