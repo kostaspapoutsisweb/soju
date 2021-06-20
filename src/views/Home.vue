@@ -16,7 +16,7 @@
           :key="sitem.id"
         >
           <div class="bg-202020 hover:bg-282828 grid grid-cols-1 sm:grid-cols-1f3f gap-6 sm:gap-8 anim-fade-in transition-all duration-300 p-5 rounded-sm"
-            v-if="sitem.id !== null"
+            v-if="sitem.method == 'api'"
           >
             <div class="grid grid-cols-1f3fa sm:block">
               <div class="relative rounded-sm shadow-2xl overflow-hidden transition duration-300 transform hover:scale-105">
@@ -103,7 +103,12 @@
           <div class="bg-202020 hover:bg-282828 gap-4 sm:gap-8 anim-fade-in transition-all duration-300 p-t2 rounded-sm"
             v-else
           >
-            <p>Invalid link format! Please try again...</p>
+            <div v-if="sitem.method == 'embed'">
+              <iframe :src="sitem.data" class="w-full h-25r" :class="sitem.type == 'track' && 'max-h-64'" />
+            </div>
+            <div v-else>
+              <p>Invalid link format! Please try again...</p>
+            </div>
           </div>
         </div>
       </div>
@@ -120,14 +125,34 @@
         playingUrl: null,
         requestOptionsGet: {},
         url: "",
+        urlMethod: "api",
         spotifyData: [],
       }
     },
     async created() {
-      if (this.$store.state.access_token == '') {
-        const responsePost = await fetch("/.netlify/functions/getSpotifyToken");
+      // Set Spotify data retrieval method
+      if (this.$route.query.sm) {
+        // For single track only
+        this.urlMethod = this.$route.query.method;
+      };
+      if (this.$route.query.method) {
+        // For overall setting
+        this.urlMethod = this.$route.query.method;
+        this.$store.commit('spotifyMethod', 'embed');
+      };
+
+      if (this.$store.state.access_token == '' && this.$store.state.spotifyMethod === 'api') {
+        // Add fallbacks for when Spotify API fails 
+        const responsePost = await fetch("/.netlify/functions/getSpotifyToken").catch(function(err) {
+          this.$store.commit('spotifyMethod', 'embed');
+          return console.warn("Could not retrieve Spotify token, switching to fallback 'embed' method: "+err);
+        });
+        if (!responsePost.ok) {
+          this.$store.commit('spotifyMethod', 'embed');
+          return console.warn("Could not connect to Spotify API, switching to fallback 'embed' method: "+responsePost.status);
+        }
         const dataPost = await responsePost.json();
-        this.$store.commit('access_token', dataPost.data.access_token)
+        this.$store.commit('access_token', dataPost.data.access_token);
       }
       this.requestOptionsGet = {
         method: "GET",
@@ -135,13 +160,15 @@
       };
 
       // Import from vuex if exists
-      this.spotifyData = this.$store.state.spotifyData
+      this.spotifyData = this.$store.state.spotifyData;
 
       // If there is ?url= parameter, directly put into field and run
       if (this.$route.query.s) {
         this.url = this.$route.query.s
         this.getSpotifyData()
-      }
+        // Reset sm to default
+        this.urlMethod = this.$store.state.spotifyMethod
+      };
       
     },
     methods: {
@@ -177,55 +204,73 @@
             itemId = idRes.substring(1);
             console.log(itemId);
           });
-        }
+        };
 
         // GET playlist data using token
-        if (itemFormat == "track") {
-          let resp = await fetch("https://api.spotify.com/v1/tracks/"+itemId, this.requestOptionsGet);
-          let trackData = await resp.json().then(trackData => ({
-            trackId: trackData.id,
-            albumId: trackData.album.id,
-            trackUrl: trackData.external_urls.spotify
-          }));
-          let albumData = await this.getSpotifyAlbum(trackData.albumId)
-          this.spotifyData.unshift({
-            type: "album",
-            id: albumData.id+Date.now(),
-            url: trackData.trackUrl,
-            track: trackData.trackId,
-            data: albumData
-          })
+        if (itemFormat == "track" && this.urlMethod == "api") {
+          let resp = await fetch("https://api.spotify.com/v1/tracks/"+itemId, this.requestOptionsGet).catch(err => this.spotifyNetworkError(err));
+          try {
+            let trackData = await resp.json().then(trackData => ({
+              trackId: trackData.id,
+              albumId: trackData.album.id,
+              trackUrl: trackData.external_urls.spotify
+            }));
+            let albumData = await this.getSpotifyAlbum(trackData.albumId)
+            this.spotifyData.unshift({
+              type: "album",
+              method: "api",
+              id: albumData.id+Date.now(),
+              url: trackData.trackUrl,
+              track: trackData.trackId,
+              data: albumData
+            })
+          } catch {
+            this.spotifyNetworkError("Network error when trying to retrieve data from Spotify API")
+          }
         }
-        else if (itemFormat == "album") {
-          let resp = await fetch("https://api.spotify.com/v1/albums/"+itemId, this.requestOptionsGet);
-          let albumData = await resp.json()
-          this.spotifyData.unshift({
-            type: "album",
-            id: albumData.id,
-            url: albumData.external_urls.spotify,
-            track: null,
-            data: albumData
-          })
+        else if (itemFormat == "album" && this.urlMethod == "api") {
+          let resp = await fetch("https://api.spotify.com/v1/albums/"+itemId, this.requestOptionsGet).catch(err => this.spotifyNetworkError(err));
+          try {
+            let albumData = await resp.json()
+            this.spotifyData.unshift({
+              type: "album",
+              method: "api",
+              id: albumData.id,
+              url: albumData.external_urls.spotify,
+              track: null,
+              data: albumData
+            })
+          } catch {
+            this.spotifyNetworkError("Network error when trying to retrieve data from Spotify API")
+          }
         }
-        else if (itemFormat == "playlist") {
-          let resp = await fetch("https://api.spotify.com/v1/playlists/"+itemId, this.requestOptionsGet);
-          let playlistData = await resp.json()
-          this.spotifyData.unshift({
-            type: "playlist",
-            id: playlistData.id,
-            url: playlistData.external_urls.spotify,
-            track: null,
-            data: playlistData
-          })
+        else if (itemFormat == "playlist" && this.urlMethod == "api") {
+          let resp = await fetch("https://api.spotify.com/v1/playlists/"+itemId, this.requestOptionsGet).catch(err => this.spotifyNetworkError(err));
+          try {
+            let playlistData = await resp.json()
+            this.spotifyData.unshift({
+              type: "playlist",
+              method: "api",
+              id: playlistData.id,
+              url: playlistData.external_urls.spotify,
+              track: null,
+              data: playlistData
+            })
+          } catch {
+            this.spotifyNetworkError("Network error when trying to retrieve data from Spotify API")
+          }
         }
-        else {
+        // Return error if link is invalid
+        else if (itemFormat == null) {
           this.spotifyData.unshift({
             type: null,
-            id: null,
-            url: null,
-            track: null,
-            data: null,
+            method: null,
+            id: Date.now()
           })
+        }
+        // Embed fallback for valid links
+        else {
+          this.spotifyData.unshift(this.getSpotifyEmbed(itemFormat, this.url))
         }
         console.log(this.spotifyData)
         this.$store.commit('spotifyData', this.spotifyData)
@@ -235,6 +280,14 @@
         let resp = await fetch("https://api.spotify.com/v1/albums/"+id, this.requestOptionsGet);
         let data = await resp.json()
         return data
+      },
+      getSpotifyEmbed(itemFormat=null, url) {
+        return {
+          type: itemFormat,
+          method: "embed",
+          id: Date.now(),
+          data: this.url.replace('.com/', '.com/embed/')
+        };
       },
       play(spPreviewUrl) {
         if (spPreviewUrl == null) {
@@ -260,6 +313,11 @@
           this.player.pause();
           this.isPlaying = false;
         }
+      },
+      spotifyNetworkError(err) {
+        console.log("Could not connect to Spotify API, switching to fallback 'embed' method: "+err);
+        this.spotifyData.unshift(this.getSpotifyEmbed(this.url));
+        return console.log("Done");
       },
     },
     watch: {

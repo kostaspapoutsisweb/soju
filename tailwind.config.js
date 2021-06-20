@@ -64,7 +64,10 @@ module.exports = {
         '52': '13rem',
         '60': '15rem',
         '20r': '20rem',
+        '25r': '25rem',
+        '30r': '30rem',
         '80p': '80vh',
+        '80px': '80px',
       },
       maxHeight: {
         '4': '1rem',
@@ -82,7 +85,10 @@ module.exports = {
         '56': '14rem',
         '64': '16rem',
         '20r': '20rem',
+        '25r': '25rem',
+        '30r': '30rem',
         '80p': '80vh',
+        '80px': '80px',
       },
       minHeight: {
         '4': '1rem',
@@ -100,9 +106,12 @@ module.exports = {
         '56': '14rem',
         '64': '16rem',
         '20r': '20rem',
+        '25r': '25rem',
+        '30r': '30rem',
         '60p': '60vh',
         '75p': '75vh',
         '80p': '80vh',
+        '80px': '80px',
       },
       maxWidth: {
         '4': '1rem',
@@ -120,6 +129,9 @@ module.exports = {
         '56': '14rem',
         '64': '16rem',
         '20r': '20rem',
+        '25r': '25rem',
+        '30r': '30rem',
+        '80px': '80px',
       },
       scale: {
         '1025': '1.025'

@@ -11,6 +11,7 @@ const store = createStore({
       copyYear: '2021',
       access_token: '',
       spotifyData: [],
+      spotifyMethod: 'api',
       // count: 0
     }
   },
@@ -23,6 +24,9 @@ const store = createStore({
     },
     spotifyData (state, data) {
       state.spotifyData = data
+    },
+    spotifyMethod (state, data) {
+      state.spotifyMethod = data
     }
     // increment (state) {
     //   state.count++
