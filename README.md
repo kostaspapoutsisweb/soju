@@ -20,13 +20,13 @@ To get a direct link, you can also add the url to a `?s=` query parameter like s
 https://playsoju.netlify.app/?s=SPOTIFYLINKHERE
 ```
 
-Here's a list of query parameters:
+Here's a list of query parameters. Many of these can be strung together using `?s=str&sm=str&method=str`.
 
-|?x=|Type|Description|
+|Query|Type|Description|
 |:---|:---|:---|
 |?s=|str|Jump straight to processing a Spotify url|
 |?sm=|str|Processing method for an `?s=` url<br>*see `?method=` for more info*|
-|?method=|str|Set default processing method for the browsing session<br><ul><li>**api** *(default)*: Uses Spotify API to retrieve media</li><li>**embed**: Uses official Spotify media embed</li></ul>|
+|?method=|str|Set default processing method for the browsing session<br><ul><li>**api** *(default)*: Uses Spotify Web API to retrieve media</li><li>**embed**: Uses official Spotify media embed (fallback)</li></ul>|
 
 <br />
 
