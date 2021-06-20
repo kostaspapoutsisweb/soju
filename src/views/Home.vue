@@ -3,6 +3,7 @@
 
     <div class="flex flex-no-wrap justify-between items-center pt-t4 pb-t2">
       <h1 class="font-semibold text-3xl tracking-tighter">Play a Spotify Sample</h1>
+      <div id="player"></div>
     </div>
 
     <input class="mt-2 md:mb-t4 bg-gray-800 rounded p-t1 w-full sm:w-3/4 xl:w-4/5" v-model="url" placeholder="Paste any Spotify track, album, or playlist link here..." />
@@ -98,13 +99,18 @@
                   </div>
                 </div>
               </div>
+              <div class="w-full text-right pt-2 pb-0">
+                <span class="text-sm italic text-gray-500 transition hover:text-gray-400 cursor-pointer" @click="getSpotifyDataEmbed()" title="Click here to reload this item using a fallback method">Tracks aren't playable?</span>
+              </div>
             </div>
           </div>
           <div class="bg-202020 hover:bg-282828 gap-4 sm:gap-8 anim-fade-in transition-all duration-300 p-t2 rounded-sm"
             v-else
           >
             <div v-if="sitem.method == 'embed'">
-              <iframe :src="sitem.data" class="w-full h-25r" :class="sitem.type == 'track' && 'max-h-64'" />
+              <iframe :src="sitem.data" class="w-full h-25r border-0 rounded" :class="sitem.type == 'track' && 'max-h-64'" :title="'Spotify embed for '+sitem.url" loading="lazy" referrerpolicy="no-referrer">
+                Spotify is being blocked by your browser. Preview link: <a :href="sitem.url">sitem.url</a>
+              </iframe>
             </div>
             <div v-else>
               <p>Invalid link format! Please try again...</p>
@@ -131,14 +137,14 @@
     },
     async created() {
       // Set Spotify data retrieval method
-      if (this.$route.query.sm) {
-        // For single track only
-        this.urlMethod = this.$route.query.method;
-      };
       if (this.$route.query.method) {
         // For overall setting
         this.urlMethod = this.$route.query.method;
         this.$store.commit('spotifyMethod', 'embed');
+      };
+      if (this.$route.query.sm) {
+        // For single track only
+        this.urlMethod = this.$route.query.method;
       };
 
       if (this.$store.state.access_token == '' && this.$store.state.spotifyMethod === 'api') {
@@ -168,6 +174,7 @@
         this.getSpotifyData()
         // Reset sm to default
         this.urlMethod = this.$store.state.spotifyMethod
+        document.getElementById("player").scrollIntoView({behavior: "smooth"});
       };
       
     },
@@ -281,11 +288,19 @@
         let data = await resp.json()
         return data
       },
+      async getSpotifyDataEmbed() {
+        let urlMethod = this.urlMethod
+        this.urlMethod = "embed"
+        await this.getSpotifyData()
+        this.urlMethod = urlMethod
+        document.getElementById("player").scrollIntoView({behavior: "smooth"});
+      },
       getSpotifyEmbed(itemFormat=null, url) {
         return {
           type: itemFormat,
           method: "embed",
           id: Date.now(),
+          url: this.url,
           data: this.url.replace('.com/', '.com/embed/')
         };
       },
