@@ -1,16 +1,10 @@
-![Soju logo](/public/media/android-chrome-192x192.png)
-
-# Soju for Spotify 🎶
+# ![Soju logo](/public/media/favicon-32x32.png)&ensp;Soju for Spotify 🎶
 
 Soju lets you play music samples/listen to song previews from Spotify on any device -- no downloading apps, no trackers, and fast load times.
 
 <https://playsoju.netlify.app>
 
-[![Soju website preview](/public/media/preview.png)](#instances)
-
-*Built using Vue 3, Vite, and Tailwind CSS using Spotify Web API.*
-
-<br />
+[<img src="/public/media/preview.png" width="75%" />](#instances)
 
 ## How to Use
 
@@ -55,3 +49,7 @@ Soju is free, open source, and self-hostable. If you want to host your own Soju 
 The way Soju works is that, on page load, a Spotify auth token is retrieved using your Spotify API Key via Netlify Functions and cached in the user device's Vuex store. The Spotify auth token expires after an hour, and Spotify ratelimits users using this auth token.
 
 Soju works on the free Netlify tier, which offers a generous free tier of Netlify Functions.
+
+<br>
+
+*Built using Vue 3, Vite, and Tailwind CSS using Spotify Web API.*
