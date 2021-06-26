@@ -1,4 +1,4 @@
-# ![Soju logo](/public/media/favicon-32x32.png)&ensp;Soju for Spotify 🎶
+# Soju for Spotify 🎶
 
 Soju lets you play music samples/listen to song previews from Spotify on any device -- no downloading apps, no trackers, and fast load times.
 
