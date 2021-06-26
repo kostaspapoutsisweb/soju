@@ -6,7 +6,9 @@ Soju lets you play music samples/listen to song previews from Spotify on any dev
 
 <https://playsoju.netlify.app>
 
-*Built using Vite, Vue 3, and Tailwind CSS using Spotify Web API.*
+[![Soju website preview](/public/media/preview.png)](#instances)
+
+*Built using Vue 3, Vite, and Tailwind CSS using Spotify Web API.*
 
 <br />
 
