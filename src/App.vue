@@ -9,8 +9,8 @@
           <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Listen to music samples from Spotify links on any device</h1>
         </div>
         <div class="text-left xs:hidden">
-          <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Soju</h1>
-          <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Listen to Spotify music samples</h1>
+          <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Musicy</h1>
+          <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Ακούστε spotify μουσική από το εργαλείο αυτό!</h1>
         </div>
       </div>
     </router-link>
