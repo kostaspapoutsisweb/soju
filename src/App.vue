@@ -35,7 +35,7 @@
       </router-view>
 
       <div class="text-center pt-24 pb-2">
-        &copy;: {{ this.$store.state.copyYear }}&ensp;Made with 💝 by Project PAP Official
+        &copy;: {{ this.$store.state.copyYear }}&ensp;Δημιουργήθηκε με 💝 από το Project PAP Official
       </div>
 
     </div>
