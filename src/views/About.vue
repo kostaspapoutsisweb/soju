@@ -2,7 +2,7 @@
   <div class="about w-full px-t2 sm:px-t4 md:px-t8 py-t4 sm:py-t6">
     <h1 class="text-xl sm:text-3xl mb-t2 text-center">Σχετικά με αυτό το εργαλείο</h1>
     <p class="text-center text-gray-300">Φτιάχτηκε με 💝 και μεράκι από το <a href="https://projectpap.gq" target="blank" title="Project PAP Official">Project PAP</a></p>
-    <p class="text-center text-lg font-bold pb-t4">Site built using Vue 3, Vite, and Tailwind CSS</p>
+    <p class="text-center text-lg font-bold pb-t4">Το εργαλείο χτίστηκε με την χρήση Vue 3, Vite, και Tailwind CSS</p>
     <div class="bg-202020 shadow-lg rounded px-t2 sm:px-t4 py-0 mb-t2"
       v-for="(creditcat,index) in credits"
       :key="index"
