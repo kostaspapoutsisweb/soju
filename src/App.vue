@@ -35,7 +35,7 @@
       </router-view>
 
       <div class="text-center pt-24 pb-2">
-        <a href="https://github.com/coffeebank" rel="noopener" class="text-gray-500 transition duration-300 hover:text-gray-400">&copy; {{ this.$store.state.copyYear }}&ensp;Made with 💝 by coffeebank</a>
+        &copy;: {{ this.$store.state.copyYear }}&ensp;Made with 💝 by Project PAP Official
       </div>
 
     </div>
@@ -48,8 +48,8 @@
     data () {
       return {
         navitems: [
-          { title: "Home", url: "/" },
-          { title: "About", url: "/about" },
+          { title: "Αρχική", url: "/" },
+          { title: "Σχετικά", url: "/about" },
         ],
       }
     },
