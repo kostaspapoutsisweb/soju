@@ -5,8 +5,8 @@
         <img class="w-20 h-20 xs:w-28 xs:h-28 md:w-40 md:h-40 lg:w-56 lg:h-56 rounded-full shadow-2xl filter contrast-125 select-none object-cover pointer-events-none" src="/media/logo-full.jpg" alt="Soju for Spotify" />
         <div class="text-left hidden xs:block">
           <h1 class="font-bold text-gray-200 text-xs md:text-sm uppercase my-2">Music Player</h1>
-          <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Soju for Spotify</h1>
-          <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Listen to music samples from Spotify links on any device</h1>
+          <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Musicy Project PAP</h1>
+          <h1 class="text-gray-400 text-sm sm:text-sm tracking-wide my-2">Ακούστε spotify μουσική από το εργαλείο αυτό!</h1>
         </div>
         <div class="text-left xs:hidden">
           <h1 class="font-bold text-gray-100 my-2 text-4xl sm:text-5xl md:text-6xl lg:text-5r leading-none">Musicy Project PAP</h1>
