@@ -9,6 +9,9 @@
     <input class="mt-2 md:mb-t4 bg-gray-800 rounded p-t1 w-full sm:w-3/4 xl:w-4/5" v-model="url" placeholder="Paste any Spotify track, album, or playlist link here..." />
 
     <div class="inline-flex items-center justify-center px-4 py-3 shadow-lg text-base font-medium leading-6 transition duration-300 bg-202020 hover:bg-282828 rounded-md cursor-pointer mx-t0 mt-t1 mb-t3 sm:my-t4 sm:mx-t2" @click="getSpotifyData()">Πάρτε αποτελέσματα</div>
+    
+    <a href="?s=https://open.spotify.com/artist/6YZmV2xFddssAVfrSu1sfI"><div class="inline-flex items-center justify-center px-4 py-3 shadow-lg text-base font-medium leading-6 transition duration-300 bg-202020 hover:bg-282828 rounded-md cursor-pointer mx-t0 mt-t1 mb-t3 sm:my-t4 sm:mx-t2">12ος Πίθηκος</div></a>
+
 
       <div class="grid grid-cols-1 xl:w-4/5 2xl:w-full 2xl:grid-cols-2 gap-4">
 
